@@ -1,0 +1,142 @@
+services:
+
+  # PostgreSQL 15 + PostGIS
+
+  postgres:
+    image: postgis/postgis:15-3.3
+    container_name: deliveryos-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: deliveryos
+      POSTGRES_USER: deliveryos
+      POSTGRES_PASSWORD: deliveryos_secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U deliveryos -d deliveryos"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - deliveryos-network
+
+  # Redis 7
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: deliveryos-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --requirepass deliveryos_redis_secret
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "deliveryos_redis_secret", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - deliveryos-network
+
+  # Zookeeper
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.6.0
+    container_name: deliveryos-zookeeper
+    restart: unless-stopped
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    volumes:
+      - zookeeper_data:/var/lib/zookeeper/data
+      - zookeeper_logs:/var/lib/zookeeper/log
+    networks:
+      - deliveryos-network
+
+  # Apache Kafka
+
+  kafka:
+    image: confluentinc/cp-kafka:7.6.0
+    container_name: deliveryos-kafka
+    restart: unless-stopped
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+    volumes:
+      - kafka_data:/var/lib/kafka/data
+    networks:
+      - deliveryos-network
+
+  # Kafka UI  (outil dev)
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: deliveryos-kafka-ui
+    restart: unless-stopped
+    depends_on:
+      - kafka
+    ports:
+      - "8090:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: deliveryos-local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+    networks:
+      - deliveryos-network
+
+  # Zipkin  (distributed tracing)
+
+  zipkin:
+    image: openzipkin/zipkin:3
+    container_name: deliveryos-zipkin
+    restart: unless-stopped
+    ports:
+      - "9411:9411"
+    networks:
+      - deliveryos-network
+
+  # pgAdmin  (outil dev)
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: deliveryos-pgadmin
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@deliveryos.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    networks:
+      - deliveryos-network
+
+# Volumes
+
+volumes:
+  postgres_data:
+  redis_data:
+  zookeeper_data:
+  zookeeper_logs:
+  kafka_data:
+
+# Network
+
+networks:
+  deliveryos-network:
+    driver: bridge
