@@ -153,3 +153,9 @@ ai-engine/**/*.pyc
 
 # Node
 frontend/node_modules/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
