@@ -141,3 +141,15 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Java build
+backend/target/
+
+# Python venv
+ai-engine/.venv/
+ai-engine/__pycache__/
+ai-engine/**/__pycache__/
+ai-engine/**/*.pyc
+
+# Node
+frontend/node_modules/
