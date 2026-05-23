@@ -5,12 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36bbc511-b1c6-4856-b984-a7f44313303e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ai-engine/models/co2_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ai-engine/schemas/co2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/deliveryos/adapters/in/web/controllers/o2Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/deliveryos/application/usecases/Co2UseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/map/DeliveryMap.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/map/DeliveryMarker.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/map/DriverMarker.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/map/MapControls.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/map/RouteLayer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/hooks/useRouteOptimization.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/services/tourService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai-engine/routers/co2.py" beforeDir="false" afterPath="$PROJECT_DIR$/ai-engine/routers/co2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Tours.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Tours.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +21,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature/co2-prediction" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
@@ -35,7 +43,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/co2-prediction",
+    "git-widget-placeholder": "feature/interactive-route-map",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Software Engineer/deliveryos",
@@ -45,7 +53,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "C:\\Software Engineer\\deliveryos\\frontend\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.3.1.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -86,7 +94,8 @@
       <workItem from="1779211885374" duration="111000" />
       <workItem from="1779212011137" duration="1261000" />
       <workItem from="1779299684507" duration="1533000" />
-      <workItem from="1779485234089" duration="1260000" />
+      <workItem from="1779485234089" duration="1979000" />
+      <workItem from="1779566668593" duration="961000" />
     </task>
     <servers />
   </component>
