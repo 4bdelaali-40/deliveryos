@@ -5,15 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36bbc511-b1c6-4856-b984-a7f44313303e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/map/DeliveryMap.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/map/DeliveryMarker.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/map/DriverMarker.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/map/MapControls.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/map/RouteLayer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/hooks/useRouteOptimization.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/services/tourService.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/deliveryos/adapters/in/web/controllers/GpsTrackingController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/deliveryos/application/usecases/FleetTrackingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/deliveryos/application/usecases/GpsUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/deliveryos/config/WebSocketConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/deliveryos/domain/model/GpsPosition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/hooks/useFleetTracking.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/services/websocket.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Tours.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Tours.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Tracking.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Tracking.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,24 +41,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/interactive-route-map",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Software Engineer/deliveryos",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.3.1.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/realtime-gps-tracking&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Software Engineer/deliveryos&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.3.1.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="deliveryos" />
@@ -95,7 +97,9 @@
       <workItem from="1779212011137" duration="1261000" />
       <workItem from="1779299684507" duration="1533000" />
       <workItem from="1779485234089" duration="1979000" />
-      <workItem from="1779566668593" duration="961000" />
+      <workItem from="1779566668593" duration="2670000" />
+      <workItem from="1779726692069" duration="693000" />
+      <workItem from="1779727440465" duration="10000" />
     </task>
     <servers />
   </component>
