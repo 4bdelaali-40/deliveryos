@@ -163,3 +163,10 @@ logging:
 app:
   frontend-url: ${FRONTEND_URL:http://localhost:5173}
   upload-dir: ${UPLOAD_DIR:./uploads}
+  sendgrid:
+    api-key: ${SENDGRID_API_KEY:}
+    from-email: ${SENDGRID_FROM_EMAIL:noreply@deliveryos.com}
+  twilio:
+    account-sid: ${TWILIO_ACCOUNT_SID:}
+    auth-token: ${TWILIO_AUTH_TOKEN:}
+    from-number: ${TWILIO_FROM_NUMBER:+1234567890}
