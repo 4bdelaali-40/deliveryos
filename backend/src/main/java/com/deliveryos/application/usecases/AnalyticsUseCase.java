@@ -2,13 +2,11 @@ package com.deliveryos.application.usecases;
 
 import com.deliveryos.adapters.in.web.dto.response.KpiResponse;
 import com.deliveryos.domain.model.DeliveryStatus;
-import com.deliveryos.ports.out.DeliveryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDate;
+import com.deliveryos.ports.out.DeliveryRepository;
 
 /**
  * Use case Analytics — calcul des KPIs et métriques.

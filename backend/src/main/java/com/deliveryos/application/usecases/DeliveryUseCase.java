@@ -5,7 +5,6 @@ import com.deliveryos.adapters.in.web.dto.request.UpdateDeliveryRequest;
 import com.deliveryos.domain.model.Delivery;
 import com.deliveryos.domain.model.DeliveryPriority;
 import com.deliveryos.domain.model.DeliveryStatus;
-import com.deliveryos.ports.out.DeliveryRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.UUID;
+import com.deliveryos.ports.out.DeliveryRepository;
 
 @Slf4j
 @Service

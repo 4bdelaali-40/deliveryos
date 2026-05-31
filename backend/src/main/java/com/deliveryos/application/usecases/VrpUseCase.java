@@ -5,15 +5,13 @@ import com.deliveryos.adapters.out.ai.dto.VrpRequest;
 import com.deliveryos.adapters.out.ai.dto.VrpResponse;
 import com.deliveryos.domain.model.Delivery;
 import com.deliveryos.domain.model.DeliveryStatus;
-import com.deliveryos.ports.out.DeliveryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
+import com.deliveryos.ports.out.DeliveryRepository;
 
 /**
  * Use case VRP — orchestre l'optimisation de routes.
