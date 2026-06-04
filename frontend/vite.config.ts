@@ -41,7 +41,6 @@ export default defineConfig({
                     vendor: ['react', 'react-dom', 'react-router-dom'],
                     maps: ['leaflet', 'react-leaflet'],
                     charts: ['recharts'],
-                    motion: ['framer-motion'],
                 },
             },
         },
