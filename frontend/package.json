@@ -3,14 +3,17 @@
   "private": true,
   "version": "1.0.0",
   "description": "DeliveryOS — Enterprise Delivery Management Platform",
+  "main": "electron-dist/main.js",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "dev:electron": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && npm run compile:electron && electron electron-dist/main.js\"",
+    "compile:electron": "tsc -p tsconfig.electron.json",
+    "build": "tsc -p tsconfig.json && vite build",
+    "build:electron": "npm run build && npm run compile:electron && electron-builder",
     "preview": "vite preview",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
     "lint": "eslint . --ext ts,tsx --max-warnings 0",
-    "lint:fix": "eslint . --ext ts,tsx --fix",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
@@ -40,7 +43,7 @@
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^16.0.0",
     "@types/leaflet": "^1.9.12",
-    "@types/node": "^20.14.9",
+    "@types/node": "^20.19.41",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/sockjs-client": "^1.5.4",
@@ -49,6 +52,9 @@
     "@vitejs/plugin-react-swc": "^3.7.0",
     "@vitest/coverage-v8": "^1.6.0",
     "autoprefixer": "^10.4.19",
+    "concurrently": "^10.0.0",
+    "electron": "^42.3.0",
+    "electron-builder": "^26.8.1",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
@@ -56,8 +62,10 @@
     "postcss": "^8.4.39",
     "prettier": "^3.3.2",
     "tailwindcss": "^3.4.4",
+    "ts-node": "^10.9.2",
     "typescript": "^5.5.3",
     "vite": "^5.3.2",
-    "vitest": "^1.6.0"
+    "vitest": "^1.6.0",
+    "wait-on": "^9.0.10"
   }
 }
