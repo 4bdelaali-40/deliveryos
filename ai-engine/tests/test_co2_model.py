@@ -1,5 +1,5 @@
 """Tests for CO2 Prediction Model."""
-import pytest
+
 from models.co2_model import Co2Model
 
 

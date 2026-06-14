@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import { DeliveryMarker } from './DeliveryMarker'
@@ -9,8 +9,8 @@ import type { Delivery } from '@/types'
 
 // Fix Leaflet default icon issue with Vite
 import L from 'leaflet'
-import iconUrl from 'leaflet/dist/images/marker-icon.png'
-import iconShadowUrl from 'leaflet/dist/images/marker-shadow.png'
+const iconUrl = 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png'
+const iconShadowUrl = 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png'
 
 L.Marker.prototype.options.icon = L.icon({
     iconUrl,
@@ -92,7 +92,7 @@ export function DeliveryMap({
 
                 {/* Marqueurs livraisons */}
                 {result
-                    ? result.tours.map((tour, tourIndex) =>
+                    ? result.tours.map((tour, _tourIndex) =>
                         tour.stops.map((stop) => {
                             const delivery = deliveries.find((d) => d.id === stop.deliveryId)
                             if (!delivery) return null

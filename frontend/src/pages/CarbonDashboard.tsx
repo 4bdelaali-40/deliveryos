@@ -1,17 +1,4 @@
-import { useQuery } from 'react-query'
 import { KpiCard } from '@/components/charts/KpiCard'
-import apiClient from '@/services/api'
-import type { ApiResponse } from '@/types'
-
-interface CarbonKpis {
-  totalCo2Kg: number
-  co2PerDelivery: number
-  co2PerKm: number
-  electricVehiclesPct: number
-  targetReductionPct: number
-  currentReductionPct: number
-  status: string
-}
 
 export default function CarbonDashboard() {
   return (

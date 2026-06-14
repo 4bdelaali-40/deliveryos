@@ -27,8 +27,8 @@ function createWindow(): void {
       })
     }
 
-    // Attendre 3 secondes que Vite démarre
-    setTimeout(loadApp, 3000)
+    // Attendre 30 secondes que Vite démarre
+    setTimeout(loadApp, 30000)
     mainWindow.webContents.openDevTools()
   } else {
     mainWindow.loadFile(join(__dirname, '../dist/index.html'))

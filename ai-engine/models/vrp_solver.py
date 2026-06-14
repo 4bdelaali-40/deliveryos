@@ -8,13 +8,12 @@ from datetime import datetime, timedelta
 from ortools.constraint_solver import pywrapcp, routing_enums_pb2
 
 from schemas.vrp import (
-    DeliveryPoint,
     StopResult,
     TourResult,
-    Vehicle,
     VrpRequest,
     VrpResponse,
 )
+
 from utils.logger import get_logger
 
 logger = get_logger(__name__)

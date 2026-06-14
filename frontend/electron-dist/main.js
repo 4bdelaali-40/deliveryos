@@ -25,8 +25,8 @@ function createWindow() {
                 setTimeout(loadApp, 1000);
             });
         };
-        // Attendre 3 secondes que Vite démarre
-        setTimeout(loadApp, 3000);
+        // Attendre 30 secondes que Vite démarre
+        setTimeout(loadApp, 30000);
         mainWindow.webContents.openDevTools();
     }
     else {

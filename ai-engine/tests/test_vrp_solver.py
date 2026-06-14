@@ -1,5 +1,5 @@
 """Tests for VRP Solver."""
-import pytest
+
 from models.vrp_solver import VrpSolver
 from schemas.vrp import DeliveryPoint, Vehicle, VrpRequest
 
