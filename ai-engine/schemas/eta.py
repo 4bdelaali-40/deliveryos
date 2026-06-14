@@ -1,7 +1,5 @@
 """Schémas Pydantic pour la prédiction ETA."""
 from pydantic import BaseModel
-from typing import Optional
-
 
 class EtaPredictionRequest(BaseModel):
     driver_id: str

@@ -2,7 +2,7 @@
 Zone Clustering Model — DBSCAN.
 Groupe les adresses de livraison en zones géographiques cohérentes.
 """
-import math
+
 from utils.logger import get_logger
 
 logger = get_logger(__name__)

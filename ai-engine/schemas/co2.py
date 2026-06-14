@@ -1,6 +1,5 @@
 """Schémas Pydantic pour la prédiction CO2."""
 from pydantic import BaseModel
-from typing import Optional
 
 
 class Co2PredictionRequest(BaseModel):

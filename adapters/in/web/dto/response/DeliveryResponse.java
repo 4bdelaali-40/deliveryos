@@ -1,18 +1,15 @@
-package com.deliveryos.adapters.in.web.dto.response;
+package adapters.in.web.dto.response;
 
 import com.deliveryos.domain.model.Delivery;
 import com.deliveryos.domain.model.DeliveryPriority;
 import com.deliveryos.domain.model.DeliveryStatus;
-import lombok.Builder;
-import lombok.Getter;
 
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.UUID;
 
-@Getter
-@Builder
+@SuppressWarnings("unused")
 public class DeliveryResponse {
 
     private final UUID id;

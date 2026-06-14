@@ -1,4 +1,4 @@
-package com.deliveryos.adapters.in.web.dto.request;
+package adapters.in.web.dto.request;
 
 import com.deliveryos.domain.model.Role;
 import jakarta.validation.constraints.Email;

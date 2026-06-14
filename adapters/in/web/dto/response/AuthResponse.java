@@ -1,4 +1,4 @@
-package com.deliveryos.adapters.in.web.dto.response;
+package adapters.in.web.dto.response;
 
 import com.deliveryos.domain.model.Role;
 import lombok.Builder;

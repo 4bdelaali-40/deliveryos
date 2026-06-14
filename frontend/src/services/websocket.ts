@@ -4,92 +4,102 @@ import type { GpsPosition } from '@/types'
 
 type FleetUpdateCallback = (position: GpsPosition) => void
 
+// L'endpoint STOMP est exposé par le backend Spring Boot (port 8080),
+// pas par le serveur de dev Vite (port 5173). SockJS a besoin de l'URL absolue.
+const WS_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8080'
+
 class WebSocketService {
-    private client: Client | null = null
-    private subscriptions: StompSubscription[] = []
+  private client: Client | null = null
+  private subscriptions: StompSubscription[] = []
 
-    connect(onConnected?: () => void): void {
-        this.client = new Client({
-            webSocketFactory: () => new SockJS('/ws'),
-            reconnectDelay: 5000,
-            onConnect: () => {
-                console.log('WebSocket connected')
-                onConnected?.()
-            },
-            onDisconnect: () => {
-                console.log('WebSocket disconnected')
-            },
-            onStompError: (frame) => {
-                console.error('STOMP error:', frame)
-            },
-        })
+  connect(onConnected?: () => void): void {
+    // Evite les connexions multiples si déjà connecté/en cours de connexion
+    if (this.client?.active) return
 
-        this.client.activate()
-    }
+    this.client = new Client({
+      webSocketFactory: () => new SockJS(`${WS_BASE_URL}/ws`),
+      reconnectDelay: 5000,
+      onConnect: () => {
+        console.log('WebSocket connected')
+        onConnected?.()
+      },
+      onDisconnect: () => {
+        console.log('WebSocket disconnected')
+      },
+      onStompError: (frame) => {
+        console.error('STOMP error:', frame)
+      },
+      onWebSocketError: (event) => {
+        console.error('WebSocket connection error:', event)
+      },
+    })
 
-    disconnect(): void {
-        this.subscriptions.forEach((sub) => sub.unsubscribe())
-        this.subscriptions = []
-        this.client?.deactivate()
-        this.client = null
-    }
+    this.client.activate()
+  }
 
-    subscribeToFleet(callback: FleetUpdateCallback): void {
-        if (!this.client?.connected) return
+  disconnect(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe())
+    this.subscriptions = []
+    this.client?.deactivate()
+    this.client = null
+  }
 
-        const sub = this.client.subscribe('/topic/fleet', (message) => {
-            try {
-                const position = JSON.parse(message.body) as GpsPosition
-                callback(position)
-            } catch (err) {
-                console.error('Failed to parse GPS position:', err)
-            }
-        })
+  subscribeToFleet(callback: FleetUpdateCallback): void {
+    if (!this.client?.connected) return
 
-        this.subscriptions.push(sub)
-    }
+    const sub = this.client.subscribe('/topic/fleet', (message) => {
+      try {
+        const position = JSON.parse(message.body) as GpsPosition
+        callback(position)
+      } catch (err) {
+        console.error('Failed to parse GPS position:', err)
+      }
+    })
 
-    subscribeToTour(tourId: string, callback: FleetUpdateCallback): void {
-        if (!this.client?.connected) return
+    this.subscriptions.push(sub)
+  }
 
-        const sub = this.client.subscribe(`/topic/tour/${tourId}`, (message) => {
-            try {
-                const position = JSON.parse(message.body) as GpsPosition
-                callback(position)
-            } catch (err) {
-                console.error('Failed to parse tour position:', err)
-            }
-        })
+  subscribeToTour(tourId: string, callback: FleetUpdateCallback): void {
+    if (!this.client?.connected) return
 
-        this.subscriptions.push(sub)
-    }
+    const sub = this.client.subscribe(`/topic/tour/${tourId}`, (message) => {
+      try {
+        const position = JSON.parse(message.body) as GpsPosition
+        callback(position)
+      } catch (err) {
+        console.error('Failed to parse tour position:', err)
+      }
+    })
 
-    sendGpsUpdate(
-        driverId: string,
-        latitude: number,
-        longitude: number,
-        tourId?: string,
-        speedKmh?: number,
-        heading?: number
-    ): void {
-        if (!this.client?.connected) return
+    this.subscriptions.push(sub)
+  }
 
-        this.client.publish({
-            destination: '/app/gps/update',
-            body: JSON.stringify({
-                driverId,
-                tourId,
-                latitude,
-                longitude,
-                speedKmh,
-                heading,
-            }),
-        })
-    }
+  sendGpsUpdate(
+    driverId: string,
+    latitude: number,
+    longitude: number,
+    tourId?: string,
+    speedKmh?: number,
+    heading?: number
+  ): void {
+    if (!this.client?.connected) return
 
-    isConnected(): boolean {
-        return this.client?.connected ?? false
-    }
+    this.client.publish({
+      destination: '/app/gps/update',
+      body: JSON.stringify({
+        driverId,
+        tourId,
+        latitude,
+        longitude,
+        speedKmh,
+        heading,
+      }),
+    })
+  }
+
+  isConnected(): boolean {
+    return this.client?.connected ?? false
+  }
 }
 
 export const websocketService = new WebSocketService()

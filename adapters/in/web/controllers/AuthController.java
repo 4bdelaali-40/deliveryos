@@ -1,4 +1,4 @@
-package com.deliveryos.adapters.in.web.controllers;
+package adapters.in.web.controllers;
 
 import com.deliveryos.adapters.in.web.dto.request.LoginRequest;
 import com.deliveryos.adapters.in.web.dto.request.RegisterRequest;
