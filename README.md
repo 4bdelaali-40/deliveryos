@@ -50,34 +50,34 @@ Key highlights:
 The backend follows **hexagonal architecture** (ports and adapters), isolating business logic from frameworks and external systems.
 
 ```
-                     ┌──────────────────────────────────────────────┐
-                     │         Electron + React Frontend :5173       │
-                     │   Vite · TypeScript · TailwindCSS · Leaflet   │
-                     │   React Query · React Router · Zustand        │
-                     └─────────────────────┬───────────────────────┬─┘
-                                            │ REST                   │ WebSocket (STOMP)
-                     ┌──────────────────────▼─────────────────────┐ │
-                     │           Spring Boot Backend :8080         │◀┘
-                     │  ┌────────────────────────────────────────┐ │
-                     │  │  JWT Auth Filter + MFA + RBAC          │ │
-                     │  │  GpsSimulationService (fleet tracking) │ │
-                     │  │  ScheduledTasks (CO2, notifications)   │ │
-                     │  └────────────────────────────────────────┘ │
+                     ┌─────────────────────────────────────────────────────┐
+                     │         Electron + React Frontend :5173             │
+                     │   Vite · TypeScript · TailwindCSS · Leaflet         │
+                     │   React Query · React Router · Zustand              │
+                     └─────────────────────┬─────────────────────────────┬─┘
+                                            │ REST                       │ WebSocket (STOMP)
+                     ┌──────────────────────▼────────────────────────┐   │
+                     │           Spring Boot Backend :8080           │◀┘
+                     │  ┌────────────────────────────────────────┐   │
+                     │  │  JWT Auth Filter + MFA + RBAC          │   │
+                     │  │  GpsSimulationService (fleet tracking) │   │
+                     │  │  ScheduledTasks (CO2, notifications)   │   │
+                     │  └────────────────────────────────────────┘   │
                      │  adapters/in/web   ·  application (use cases) │
                      │  adapters/out/persistence  ·  domain          │
-                     └───────┬──────────────┬──────────────┬────────┘
+                     └───────┬──────────────┬──────────────┬─────────┘
                               │              │              │
                   ┌───────────▼───┐  ┌───────▼──────┐  ┌────▼─────┐
                   │  PostgreSQL   │  │  Redis       │  │  Kafka   │
                   │  + PostGIS    │  │  Cache/Session│ │ Zookeeper│
                   └───────────────┘  └──────────────┘  └──────────┘
                               │
-                     ┌────────▼─────────┐        ┌──────────────┐
-                     │  AI Engine :8000  │        │   Zipkin     │
-                     │  FastAPI          │        │   :9411      │
-                     │  OR-Tools · XGBoost│       │   Tracing    │
-                     │  LSTM · Prophet · DBSCAN │  └──────────────┘
-                     └───────────────────┘
+                     ┌────────▼─────────────────┐        ┌──────────────┐
+                     │  AI Engine :8000         │        │   Zipkin     │
+                     │  FastAPI                 │        │   :9411      │
+                     │  OR-Tools · XGBoost      │        │   Tracing    │
+                     │  LSTM · Prophet · DBSCAN │        └──────────────┘
+                     └──────────────────────────┘
 ```
 
 ### Design principles
@@ -446,51 +446,6 @@ SUB    /topic/fleet                   Live driver position broadcasts
 
 ---
 
-## Project Structure
-
-```
-deliveryos/
-├── backend/
-│   └── src/main/java/com/deliveryos/
-│       ├── domain/                  # Core business entities and rules
-│       ├── application/
-│       │   ├── usecases/            # AuthUseCase, DeliveryUseCase, AnalyticsUseCase...
-│       │   └── services/            # ScheduledTasks, GpsSimulationService
-│       ├── ports/
-│       │   ├── in/                  # Use case interfaces
-│       │   └── out/                 # Repository & messaging interfaces
-│       ├── adapters/
-│       │   ├── in/web/
-│       │   │   ├── controllers/     # REST controllers
-│       │   │   └── dto/             # Request/response DTOs
-│       │   └── out/
-│       │       ├── persistence/     # JPA entities, repositories, mappers
-│       │       └── ai/              # AI engine HTTP client
-│       ├── config/                  # Security, JWT, CORS, WebSocket, Kafka
-│       └── shared/                  # ApiResponse, PageResponse, GlobalExceptionHandler
-├── frontend/
-│   ├── src/
-│   │   ├── pages/                   # Dashboard, Deliveries, Tours, Tracking, Analytics, Carbon, Fleet, Drivers, Admin
-│   │   ├── components/
-│   │   │   ├── layout/              # AppLayout, Sidebar
-│   │   │   └── map/                 # DeliveryMap, DriverMarker
-│   │   ├── services/                # api.ts, websocket.ts, tourService.ts
-│   │   ├── hooks/                   # useFleetTracking, useRouteOptimization
-│   │   ├── store/                   # useStore (auth, global state)
-│   │   └── types/                   # Shared TypeScript types
-│   ├── vite.config.ts               # Dev proxy to backend
-│   └── package.json
-├── ai-engine/
-│   ├── main.py                      # FastAPI app
-│   └── models/                      # OR-Tools, XGBoost, LSTM, Prophet, DBSCAN
-├── docker-compose.yml                # Infrastructure orchestration
-├── insert_test_users.py              # Seed: SUPER_ADMIN, DISPATCHER, DRIVER accounts
-├── insert_data.py                    # Seed: realistic drivers, vehicles, deliveries, tours
-└── README.md
-```
-
----
-
 ## Environment Variables
 
 | Variable | Service | Description | Default |
@@ -541,5 +496,3 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE) for detai
 ---
 
 **DeliveryOS** — Java 21 · Spring Boot 3.3 · React 18 · PostgreSQL/PostGIS · Apache Kafka · FastAPI
-
-Enterprise logistics platform: hexagonal architecture · real-time tracking · AI-powered optimization · carbon intelligence
